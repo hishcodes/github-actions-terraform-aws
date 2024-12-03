@@ -1,13 +1,13 @@
-name: "Terraform Destroy"
+name: "Terraform"
 
 on:
-    push:
-      branches:
-        - main
+  push:
+    branches:
+      - main
 
 jobs:
   terraform:
-    name: "Terraform Destroy"
+    name: "Terraform"
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -25,15 +25,17 @@ jobs:
           terraform_version: 1.0.1
           terraform_wrapper: false
 
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
       - name: Terraform Init
         id: init
         run: terraform init
 
-      - name: Remove S3 and DynamoDB from State
-        id: state-rm
-        run: |
-          terraform state rm aws_s3_bucket.backend_bucket
-          terraform state rm aws_dynamodb_table.backend_table
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
 
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
