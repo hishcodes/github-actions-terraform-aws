@@ -1,6 +1,9 @@
 resource "aws_s3_bucket" "tf-state-bucket" {
   bucket = "hisham-demo-tf-bucket"
   force_destroy = true
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_s3_bucket_versioning" "bucket_versioning" {
@@ -26,5 +29,8 @@ resource "aws_dynamodb_table" "tf_locking_table" {
   attribute {
     name = "LockID"
     type = "S"
+  }
+  lifecycle {
+    prevent_destroy = true
   }
 }
