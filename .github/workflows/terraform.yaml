@@ -1,9 +1,16 @@
-name: "Terraform"
+name: "Terraform Apply"
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch: # Allows manual trigger
+
+
+
+# name: "Terraform"
+
+# on:
+#   push:
+#     branches:
+#       - main
 
 jobs:
   terraform:
