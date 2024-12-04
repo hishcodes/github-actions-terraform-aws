@@ -49,8 +49,8 @@ jobs:
       - name: Add S3 and DynamoDB to State
         id: state-add
         run: |
-            terraform import module.tf-state.aws_dynamodb_table.tf_locking_table
-            terraform import module.tf-state.aws_s3_bucket.tf-state-bucket
-            terraform import module.tf-state.aws_s3_bucket_server_side_encryption_configuration.bucker_sse
-            terraform import module.tf-state.aws_s3_bucket_versioning.bucket_versioning
+            terraform import module.tf-state.aws_dynamodb_table.tf_locking_table "tf-locking"
+            terraform import module.tf-state.aws_s3_bucket.tf-state-bucket "hisham-demo-tf-bucket"
+            terraform import module.tf-state.aws_s3_bucket_server_side_encryption_configuration.bucker_sse "hisham-demo-tf-bucket"
+            terraform import module.tf-state.aws_s3_bucket_versioning.bucket_versioning "hisham-demo-tf-bucket"
             
